@@ -1,0 +1,41 @@
+# Java
+dependency-reduced-pom.xml
+
+# Scala
+*.sc
+********/target
+
+# IDEs and editors
+/.idea
+*.iml
+/.vscode
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+*.code-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.factorypath
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+/typings
+/target
+
+# System Files
+.DS_Store
+Thumbs.db
