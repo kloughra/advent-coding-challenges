@@ -1,5 +1,6 @@
 package com.xmas.challenge.twenty19
 
+import scala.annotation.tailrec
 import scala.io.Source
 
 /**
@@ -38,6 +39,7 @@ object Day2 {
   private lazy val day2File: String = "Day2Input.txt"
   lazy val defaultInput: Array[Int] = Source.fromResource(day2File).getLines.reduce(_+_).split(',').map(_.toInt)
 
+  @tailrec
   def applyOpCode(opIndex: Int, intCode: Array[Int]): Array[Int] = intCode(opIndex) match {
     case 99 ⇒ intCode //end
     case 1 ⇒ applyOpCode(step(opIndex), opcode(opIndex,intCode, _ + _))

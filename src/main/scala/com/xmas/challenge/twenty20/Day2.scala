@@ -31,13 +31,12 @@ object Day2 {
   }
 
   private val entryPattern = "(\\d+)-(\\d+) (\\w): (\\w*)".r
-  private def parsePasswords(entries: List[String]): List[PasswordEntry] = entries.map( entry ⇒
-    entry match {
-      case entryPattern(min, max , char, password) ⇒ PasswordEntry(Policy(min.toInt,max.toInt,char),password)
-      case invalidPass ⇒
-        println(s"INVALID: $invalidPass")
-        PasswordEntry(Policy(-1,-1,"N/A"),"N/A")
-    })
+  private def parsePasswords(entries: List[String]): List[PasswordEntry] = entries.map {
+    case entryPattern(min, max, char, password) ⇒ PasswordEntry(Policy(min.toInt, max.toInt, char), password)
+    case invalidPass ⇒
+      println(s"INVALID: $invalidPass")
+      PasswordEntry(Policy(-1, -1, "N/A"), "N/A")
+  }
 
   def countValidPasswords(entries: List[String]): Int = parsePasswords(entries).count(_.isValid)
 

@@ -15,17 +15,16 @@ object Day6 {
 
   val containsNewLine: String ⇒ Boolean = str ⇒ Array(" ","\n").contains(str)
   val stringToKey: String ⇒ String = key ⇒ key
-  val listToCount = { case (k: String,v: List[String]) ⇒ (k,v.length)}
+//  private val listToCount = { case (k: String,v: List[String]) ⇒ (k,v.length)}
 
   def groupFormsByAnswers(customForms: List[String]): List[Map[String,Int]] =
-    customForms.map(_.split("").filterNot(containsNewLine).groupBy(stringToKey).map(listToCount))
+    customForms.map(_.split("").filterNot(containsNewLine).groupBy(stringToKey).map({ case (k,v) ⇒ (k,v.length)}))
 
   def groupFormsByAnswersPerPerson(customForms: List[String]): List[Map[String,Int]] = {
     customForms.map(party ⇒
       party.split("\n").toList
-        .map( _.split("").toSet.toList)
-        .map (  )
-        //toList.filterNot(Array(" ","\n").contains(_)).groupBy(k ⇒ k).map({ case (k,v) ⇒ (k.toString,v.length)})
+        .flatMap( _.split(""))
+        .filterNot(str ⇒ Array(" ","\n").contains(str)).groupBy(k ⇒ k).map({ case (k,v) ⇒ (k,v.length)})
     )
   }
 

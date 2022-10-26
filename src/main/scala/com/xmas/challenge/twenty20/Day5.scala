@@ -13,7 +13,7 @@ object Day5 {
   def parseSeatOperators(seats: List[String]): List[List[String]] = seats.map(_.split("").toList)
 
   def applyOperator(operator:String, range: (Int, Int)): (Int,Int) = {
-    val half: Int = ((range._2 - range._1)/2).ceil.toInt
+    val half: Int = ((range._2 - range._1)/2).asInstanceOf[Float].ceil.toInt
     operator match {
       case "F" ⇒ (range._1, range._1 + half)
       case "B" ⇒ (range._2 - half, range._2)
@@ -23,12 +23,11 @@ object Day5 {
   }
 
   def calculateSeatPosition( seat: List[String]): ( Int, Int ) = {
-   val seatAddress: (List[String], List[String]) = seat.splitAt(7)
-    val row: Int = seatAddress._1.foldLeft[(Int,Int)]((0,127))( (position,operator) ⇒ applyOperator(operator,position))._1 //todo -  they should be the same number - check
-    val column: Int = seatAddress._2.foldLeft[(Int,Int)]((0,7))( (position,operator) ⇒ applyOperator(operator,position))._1 //todo -  they should be the same number - check
-    (row,column)
+    val seatAddress: (List[String], List[String]) = seat.splitAt(7)
+    val row: Int = seatAddress(0).foldLeft[(Int, Int)]((0, 127))((position, operator) ⇒ applyOperator(operator, position))(0) //todo -  they should be the same number - check
+    val col: Int = seatAddress(1).foldLeft[(Int, Int)]((0, 7))((position, operator) ⇒ applyOperator(operator, position))(1) //todo -  they should be the same number - check
+    (row, col)
   }
-
   def calculateUniqueSeatId(position: (Int,Int)): Int = ( position._1 * 8 ) + position._2
 
 

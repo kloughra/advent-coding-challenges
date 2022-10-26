@@ -27,10 +27,10 @@ object Day3 {
 
   def parseMatrix(input: List[String]): TreeMatrix =
     input.map( inputRow ⇒
-      inputRow.map( _ match {
+      inputRow.map {
         case '.' ⇒ Free
         case '#' ⇒ Tree
-      } ).toVector
+      }.toVector
     ).toVector
 
   def calculateNextLocationOnMatrix(location: Location, slope: Slope, treeMatrix: TreeMatrix): Option[Location] = {

@@ -1,5 +1,6 @@
 package com.xmas.challenge.twenty19
 
+import scala.annotation.tailrec
 import scala.io.Source
 
 /**
@@ -44,6 +45,7 @@ object Day1 {
    * @param fuelAccumulator
    * @return
    */
+  @tailrec
   def calculateFuelForFuelMass(fuelMass:Double, fuelAccumulator: Double = 0): Double = calculateFuel(fuelMass) match {
       case massIgnore if massIgnore <= 0 ⇒ fuelAccumulator
       case massCalculated ⇒ calculateFuelForFuelMass(massCalculated , fuelAccumulator + massCalculated)

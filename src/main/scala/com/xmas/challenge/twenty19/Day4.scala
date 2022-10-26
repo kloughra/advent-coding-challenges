@@ -1,5 +1,7 @@
 package com.xmas.challenge.twenty19
 
+import scala.annotation.tailrec
+
 object Day4 {
   /**
    *
@@ -43,6 +45,7 @@ object Day4 {
 
 //  private def matchingAdjacentDigitCountEven(word:String): Boolean =  word.matches("^((?:.*(\\w)\\2(?!\\2)).+|(\\w)\\3+)$")
   def containsSingleMatchingAdjacentDigit(word:String):Boolean = findRepeats(word.split("").toList)
+  @tailrec
   def findRepeats(word: List[String], acc:List[String] = Nil, prev: String = ""): Boolean = word match {
     case Nil ⇒ (acc :+ prev).groupBy(_.length).get(2).exists(_.nonEmpty)
     case c :: tail ⇒ prev match {

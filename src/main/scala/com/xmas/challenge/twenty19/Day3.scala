@@ -103,12 +103,13 @@ object Day3 {
       case a :: b :: tail ⇒ min( (if (a < b) a else b) :: tail)
     }
 
+  // Ick
   private def minIterative(numbers: List[Int]): Int = {
     var min: Option[Int] = None
-        for{
-          i ← (0 to numbers.length)
+        for {
+          i ← 0 to numbers.length
         } yield {
-          if(i < min) { min = Some(i)}
+          if(numbers(i) < min.getOrElse(numbers(i))) { min = Some(numbers(i))}
         }
       min.get
   }
