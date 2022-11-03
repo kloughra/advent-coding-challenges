@@ -1,6 +1,6 @@
 package com.xmas.challenge.twenty21
 
-import com.xmas.challenge.twenty21.Day4.{Board, Position, leftDiagonalIndices, rightDiagonalIndices,prettyPrintBoards}
+import com.xmas.challenge.twenty21.Day4.{Board, Position, calculateWinningScore, leftDiagonalIndices, playBingoToLose, prettyPrintBoards, rightDiagonalIndices}
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
 
@@ -34,7 +34,11 @@ class Day4Spec extends AnyFlatSpec with Matchers {
 
 
   it should "apply list of drawn numbers to a board" in {
-    1 shouldBe 1
+    val bingoBoard = Day4.applyRulesToBoards(playList,boards)
+    bingoBoard.isEmpty shouldBe false
+    bingoBoard.get(0) shouldBe 24
+    bingoBoard.get(1) shouldBe 3
+    calculateWinningScore(bingoBoard.get(0), bingoBoard.get(2)) shouldBe 4512
   }
 
   it should "check board for row bingo" in {
@@ -59,6 +63,10 @@ class Day4Spec extends AnyFlatSpec with Matchers {
     Day4.checkBoardForBingo(board) shouldBe true
   }
 
+  /**
+   * Oops Diagonals Dont Count
+   */
+
   it should "check board for left diagonal bingo" in {
     val board: Board = boards.head
     val bingoedSeq = for(bi ← board.indices) yield {
@@ -72,7 +80,7 @@ class Day4Spec extends AnyFlatSpec with Matchers {
     val bingoedBoard = bingoedSeq.toList
 
     prettyPrintBoards(List(bingoedBoard))
-    Day4.checkBoardForBingo(bingoedBoard) shouldBe true
+    Day4.checkBoardForBingo(bingoedBoard) shouldBe false
   }
   it should "check board for right diagonal bingo" in {
     var board: Board = boards.head
@@ -85,8 +93,15 @@ class Day4Spec extends AnyFlatSpec with Matchers {
     }
 
     val bingoedBoard = bingoedSeq.toList
-
     prettyPrintBoards(List(bingoedBoard))
-    Day4.checkBoardForBingo(bingoedBoard) shouldBe true
+    Day4.checkBoardForBingo(bingoedBoard) shouldBe false
+  }
+
+  it should "loose on purpose by choosing the board with the last bingo" in {
+    val bingoBoard = Day4.applyRulesToBoardsToLose(playList,boards)
+    bingoBoard(0) shouldBe 13
+    bingoBoard(1) shouldBe 2
+    calculateWinningScore(bingoBoard(0), bingoBoard(2)) shouldBe 1924
+    playBingoToLose(playList,boards) shouldBe 1924
   }
 }

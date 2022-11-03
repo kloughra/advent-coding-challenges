@@ -1,6 +1,10 @@
 package com.xmas.challenge.twenty21
 import scala.io.Source
 
+/**
+ * Day 3 - Advent of Code 2021
+ * https://adventofcode.com/2021/day/3
+ */
 object Day3 {
   private lazy val day3File: String = "Day3_2021_Input.txt"
   lazy val defaultInput: List[String] = Source.fromResource(day3File)
